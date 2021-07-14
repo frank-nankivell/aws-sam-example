@@ -45,7 +45,7 @@ pipelines:
           script:
             - npm ci
             - touch cypress.env.json
-            - export $CYPRESS_DEV > cypress.env.json
+           # - export $CYPRESS_DEV > cypress.env.json
             - export CYPRESS_api_URL=$CYPRESS_DEV 
             - echo "$CYPRESS_api_URL"
             - npm run e2e
