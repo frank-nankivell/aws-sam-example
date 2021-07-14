@@ -29,19 +29,13 @@ pipelines:
                 STACK_NAME: 'aws-sam-example-dev'
                 S3_BUCKET: 'sam-example-aws'
                 CAPABILITIES: ['CAPABILITY_IAM', 'CAPABILITY_AUTO_EXPAND']
-
-                
-  #   - step:
-  #      name: Integration tests {develop}
-  #      caches: 
-  #        - npm
-  #        - cypress
-  #      image: cypress/browsers:node14.7.0-chrome84
-  #        - npm install
-  #      script:
-  #        - export CYPRESS_api_env=https://tg8e0hnt82.execute-api.ap-southeast-1.amazonaws.com/dev/
-  #        - echo "$CYPRESS_api_env"
-  #        - export CYPRESS_api_key=$DEV_API_KEY
-  #        - export CYPRESS_example_token=$EXAMPLE_TOKEN
-  #        - npm run dev-e2e
- 
+      - step:
+          name: Integration tests
+          caches:
+            - node
+            - cypress
+          script:
+            - touch cypress.env.json
+            - echo $CYPRESS_DEV > cypress.env.json
+            - npm run e2e
+  

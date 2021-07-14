@@ -48,3 +48,11 @@ Thumbs.db
 *.mov
 *.wmv
 
+cypress.env.json
+cypress/screenshots/*
+cypress/screenshots/*/*
+cypress/screenshots/*/*/*
+
+cypress/videos/*
+cypress/videos/*/*
+cypress/videos/*/*/*
