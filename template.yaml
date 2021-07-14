@@ -15,6 +15,9 @@ Resources:
       Description: A starter AWS Lambda function.
       MemorySize: 128
       Timeout: 3
-      Policies:
-        - SESSendBouncePolicy:
-            IdentityName: !Ref IdentityNameParameter
+      Events:
+        HttpGet:
+          Type: Api
+          Properties:
+            Path: '/example'
+            Method: get
