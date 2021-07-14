@@ -21,7 +21,7 @@ pipelines:
                 AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY
                 AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
                 AWS_DEFAULT_REGION: ap-southeast-1
-                STACK_NAME: 'sam-example-aws'
+                STACK_NAME: 'franks-stack-dev'
                 S3_BUCKET: 'sam-example-aws'
                 
   #   - step:
