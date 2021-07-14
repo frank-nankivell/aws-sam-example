@@ -32,7 +32,9 @@ pipelines:
           name: Integration tests
           caches:
             - node
+            - /root/.cache/Cypress
           script:
+            - npm install
             - CYPRESS_INSTALL_BINARY=0 npm install
             - touch cypress.env.json
             - echo $CYPRESS_DEV > cypress.env.json
