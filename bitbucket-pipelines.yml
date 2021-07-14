@@ -30,6 +30,8 @@ pipelines:
                 CAPABILITIES: ['CAPABILITY_IAM', 'CAPABILITY_AUTO_EXPAND']
       - step:
           name: Integration tests
+          image: cypress/browsers:node14.7.0-chrome84
+
           caches:
             - node
            # - /root/.cache/Cypress
@@ -38,5 +40,6 @@ pipelines:
             - CYPRESS_INSTALL_BINARY=0 npm install
             - touch cypress.env.json
             - echo $CYPRESS_DEV > cypress.env.json
+            - export CYPRESS_api_URL=$CYPRESS_DEV 
             - npm run e2e
   
