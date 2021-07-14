@@ -1,4 +1,4 @@
-image: node:12.0.0
+image: node:latest
 pipelines:
   default:
     - step:
@@ -34,11 +34,13 @@ pipelines:
           caches:
             - node
             - cypress
-          image: cypress/browsers:node14.7.0-chrome84
           script:
             - npm install
             - touch cypress.env.json
             - echo $CYPRESS_DEV > cypress.env.json
             - export CYPRESS_api_URL=$CYPRESS_DEV 
             - npm run e2e
-  
+definitions:
+  caches:
+    npm: $HOME/.npm
+    cypress: $HOME/.cache/Cypress
