@@ -21,8 +21,8 @@ pipelines:
                 AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY
                 AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
                 AWS_DEFAULT_REGION: ap-southeast-1
-                STACK_NAME: aws-sam-example-develop
-                S3_BUCKET: sam-example-aws
+                STACK_NAME: 'sam-example-aws'
+                S3_BUCKET: 'sam-example-aws'
                 
   #   - step:
   #      name: Integration tests {develop}
