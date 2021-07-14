@@ -1,0 +1,25 @@
+{
+  "name": "aws-sam-example",
+  "version": "1.0.0",
+  "description": "example",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint ./functions && prettier --check \"functions/**/*.js\"",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/frank_fluxus/aws-sam-example.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/frank_fluxus/aws-sam-example#readme",
+  "devDependencies": {
+    "cypress": "^7.7.0",
+    "eslint": "^7.30.0",
+    "prettier": "^2.3.2"
+  },
+  "dependencies": {
+    "jest": "^27.0.6"
+  }
+}
