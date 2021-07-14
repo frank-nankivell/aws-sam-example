@@ -4,6 +4,7 @@ Description: A starter AWS Lambda function.
 Parameters: 
     IdentityNameParameter: 
       Type: String
+      Default: aws-sam-example
 Resources:
   helloworld:
     Type: 'AWS::Serverless::Function'
