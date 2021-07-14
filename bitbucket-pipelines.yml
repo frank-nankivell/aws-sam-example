@@ -28,6 +28,8 @@ pipelines:
                 AWS_DEFAULT_REGION: ap-southeast-1
                 STACK_NAME: 'aws-sam-example-dev'
                 S3_BUCKET: 'sam-example-aws'
+                CAPABILITIES: ['CAPABILITY_IAM', 'CAPABILITY_AUTO_EXPAND']
+
                 
   #   - step:
   #      name: Integration tests {develop}
