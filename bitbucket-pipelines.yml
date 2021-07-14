@@ -10,8 +10,8 @@ pipelines:
   branches:
     develop:
       - step:
-        name: Build and test
-        script:
+          name: Build and test
+          script:
           - npm install
           - npm run lint
           - npm run test
