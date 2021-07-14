@@ -10,6 +10,7 @@ Resources:
     Type: AWS::Serverless::Api
     Properties:
       Name: 'aws-sam-example'
+      StageName: v1
   helloworld:
     Type: 'AWS::Serverless::Function'
     Properties:
@@ -24,5 +25,5 @@ Resources:
         HttpGet:
           Type: Api
           Properties:
-            Path: '/example'
+            Path: '/hello'
             Method: get
