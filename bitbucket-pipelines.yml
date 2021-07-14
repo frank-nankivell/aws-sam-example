@@ -37,6 +37,7 @@ pipelines:
                 CAPABILITIES: ['CAPABILITY_IAM', 'CAPABILITY_AUTO_EXPAND']
       - step:
           name: Integration tests
+          image: cypress/base:14.16.0
           caches:
             - npm
             - cypress
