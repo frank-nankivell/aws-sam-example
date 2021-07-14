@@ -6,9 +6,14 @@ Parameters:
       Type: String
       Default: aws-sam-example
 Resources:
+  AwsSamExampleApiGateway:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: 'aws-sam-example'
   helloworld:
     Type: 'AWS::Serverless::Function'
     Properties:
+      RestApiId: !Ref AwsSamExampleApiGateway
       Handler: functions/example.handler
       Runtime: nodejs12.x
       CodeUri: .
