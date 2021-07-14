@@ -6,75 +6,75 @@ pipelines:
           - npm install
           - npm run lint
           - npm run test
-  branches:
-    develop:
-     - step: 
-        image: node:11.13.0-alpine
-        caches: 
-          - node_modules
-        name: Deployment [develop]
-        script:
-          - CYPRESS_INSTALL_BINARY=0 npm install
-          - pipe: atlassian/aws-sam-deploy:1.2.0
-            variables:
-              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY
-              AWS_SECRET_ACCESS_KEY: $AWS_ACCESS_SECRET
-              region: ap-southeast-1
-              EXTRA_ARGS: --stage dev
-  #   - step:
-  #      name: Integration tests {develop}
-  #      caches: 
-  #        - npm
-  #        - cypress
-  #      image: cypress/browsers:node14.7.0-chrome84
-  #        - npm install
-  #      script:
-  #        - export CYPRESS_api_env=https://tg8e0hnt82.execute-api.ap-southeast-1.amazonaws.com/dev/
-  #        - echo "$CYPRESS_api_env"
-  #        - export CYPRESS_api_key=$DEV_API_KEY
-  #        - export CYPRESS_example_token=$EXAMPLE_TOKEN
-  #        - npm run dev-e2e
-    staging:
-     - step: 
+ branches:
+  develop:
+    - step: 
+      image: node:11.13.0-alpine
+      caches: 
+        - node_modules
+      name: Deployment [develop]
+      script:
+        - CYPRESS_INSTALL_BINARY=0 npm install
+        - pipe: atlassian/aws-sam-deploy:1.2.0
+          variables:
+            AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY
+            AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+            region: ap-southeast-1
+            EXTRA_ARGS: --stage dev
+#   - step:
+#      name: Integration tests {develop}
+#      caches: 
+#        - npm
+#        - cypress
+#      image: cypress/browsers:node14.7.0-chrome84
+#        - npm install
+#      script:
+#        - export CYPRESS_api_env=https://tg8e0hnt82.execute-api.ap-southeast-1.amazonaws.com/dev/
+#        - echo "$CYPRESS_api_env"
+#        - export CYPRESS_api_key=$DEV_API_KEY
+#        - export CYPRESS_example_token=$EXAMPLE_TOKEN
+#        - npm run dev-e2e
+  staging:
+    - step: 
+      image: node:11.13.0-alpine
+      caches: 
+        - node
+      name: Deployment [staging]
+      script:
+        - CYPRESS_INSTALL_BINARY=0 npm install
+        - pipe: atlassian/aws-sam-deploy:1.2.0
+          variables:
+            AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY
+            AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+            region: ap-southeast-1
+            EXTRA_ARGS: --stage stage
+  #  - step:
+  #     image: cypress/browsers:node14.7.0-chrome84
+  #     caches: 
+  #       - npm
+  #       - cypress
+  #     name: Integration tests {staging}
+  #     script:
+  #       - npm ci
+  #       - export CYPRESS_api_env=https://pzphvht8nd.execute-api.ap-southeast-1.amazonaws.com/stage/
+  #       - echo "$CYPRESS_api_env"
+  #       - export CYPRESS_api_key=$STAGE_API_KEY
+  #       - export CYPRESS_example_token=$EXAMPLE_TOKEN
+  #       - npm run dev-e2e          
+  main:
+    - step: 
         image: node:11.13.0-alpine
         caches: 
           - node
-        name: Deployment [staging]
+        name: Deployment [main]
         script:
-          - CYPRESS_INSTALL_BINARY=0 npm install
+          - npm install
           - pipe: atlassian/aws-sam-deploy:1.2.0
             variables:
               AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY
-              AWS_SECRET_ACCESS_KEY: $AWS_ACCESS_SECRET
+              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
               region: ap-southeast-1
-              EXTRA_ARGS: --stage stage
-   #  - step:
-   #     image: cypress/browsers:node14.7.0-chrome84
-   #     caches: 
-   #       - npm
-   #       - cypress
-   #     name: Integration tests {staging}
-   #     script:
-   #       - npm ci
-   #       - export CYPRESS_api_env=https://pzphvht8nd.execute-api.ap-southeast-1.amazonaws.com/stage/
-   #       - echo "$CYPRESS_api_env"
-   #       - export CYPRESS_api_key=$STAGE_API_KEY
-   #       - export CYPRESS_example_token=$EXAMPLE_TOKEN
-   #       - npm run dev-e2e          
-    main:
-      - step: 
-          image: node:11.13.0-alpine
-          caches: 
-            - node
-          name: Deployment [main]
-          script:
-            - npm install
-            - pipe: atlassian/aws-sam-deploy:1.2.0
-              variables:
-                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY
-                AWS_SECRET_ACCESS_KEY: $AWS_ACCESS_SECRET
-                region: ap-southeast-1
-                EXTRA_ARGS: --stage prod
+              EXTRA_ARGS: --stage prod
 definitions:
   caches:
     npm: $HOME/.npm
