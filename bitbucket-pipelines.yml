@@ -16,7 +16,7 @@ pipelines:
           - cypress
           - node
           script:
-          - npm install
+          - npm ci
           - npm run lint
           - npm run test
       - step:
@@ -43,7 +43,7 @@ pipelines:
             - cypress
             - node
           script:
-            #- npm install
+            - npm ci
             - touch cypress.env.json
             - echo $CYPRESS_DEV > cypress.env.json
             - export CYPRESS_api_URL=$CYPRESS_DEV 
