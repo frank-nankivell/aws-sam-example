@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: A starter AWS Lambda function.
+Parameters: 
+    IdentityNameParameter: 
+      Type: String
+      Default: aws-sam-example
+Resources:
+  ApiGateway:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: v1
+      Name: 'aws-sam-example'
+  helloworld:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      #RestApiId: !Ref ApiGateway
+      Handler: functions/example.handler
+      Runtime: nodejs12.x
+      CodeUri: .
+      Description: A starter AWS Lambda function.
+      MemorySize: 128
+      Timeout: 3
+      Events:
+        HttpGet:
+          Type: Api
+          Properties:
+            Path: '/example'
+            Method: get

@@ -1,0 +1,70 @@
+image: node:latest
+pipelines:
+  default:
+    - step:
+        name: Build and test
+        script:
+          - npm install
+          - npm run lint
+          - npm run test
+  pull-requests:
+    '**':
+      - step:
+          name: Build and test
+          caches:
+          - npm
+          - cypress
+          - node
+          script:
+          - npm ci
+          - npm run lint
+          - npm run test
+      - step:
+          name: Deploy develop
+          caches:
+            - npm
+            - cypress
+            - node
+          script:
+            - CYPRESS_INSTALL_BINARY=0 npm install
+            - pipe: atlassian/aws-sam-deploy:1.2.0
+              variables:
+                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY
+                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                AWS_DEFAULT_REGION: ap-southeast-1
+                STACK_NAME: 'aws-sam-example-dev'
+                S3_BUCKET: 'sam-example-aws'
+                CAPABILITIES: ['CAPABILITY_IAM', 'CAPABILITY_AUTO_EXPAND']
+      - step:
+          name: Integration tests
+          image: cypress/base:14.16.0
+          caches:
+            - npm
+            - cypress
+            - node
+          script:
+            - npm ci
+           # - export $CYPRESS_DEV > cypress.env.json
+            - export CYPRESS_api_URL=$CYPRESS_DEV 
+            - echo "$CYPRESS_api_URL"
+            - npm run e2e
+      - step:
+          trigger: manual
+          name: Deploy Production
+          caches:
+            - npm
+            - cypress
+            - node
+          script:
+            - pipe: atlassian/aws-sam-deploy:1.2.0
+              variables:
+                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY
+                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                AWS_DEFAULT_REGION: ap-southeast-1
+                STACK_NAME: 'aws-sam-example-production'
+                S3_BUCKET: 'sam-example-aws'
+                CAPABILITIES: ['CAPABILITY_IAM', 'CAPABILITY_AUTO_EXPAND']
+definitions:
+  caches:
+    npm: $HOME/.npm
+    cypress: $HOME/.cache/Cypress

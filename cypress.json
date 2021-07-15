@@ -1,0 +1,19 @@
+{
+    "screenshotOnRunFailure": false,
+    "video": false,
+    "screenshots": false,
+    "videoUploadOnPasses": false,
+    "trashAssetsBeforeRuns": true,
+    "numTestsKeptInMemory": 1,
+    "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
+    "chromeWebSecurity": false,
+    "cypress-plugin-snapshots": {
+      "autoCleanUp": true,
+      "imageConfig": {
+        "createDiffImage": false
+      },
+      "screenshotConfig": {},
+      "updateSnapshots": false
+    }
+  }
+  
