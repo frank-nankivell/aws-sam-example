@@ -3,7 +3,7 @@ const baseURL = Cypress.env("api_URL");
 context("First test", () => {
   // Test case 1
   it("check HelloWord", () => {
-    const basePath = "/hello";
+    const basePath = "/example";
 
     const options = {
       method: "GET",
