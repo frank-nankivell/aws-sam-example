@@ -10,11 +10,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/frank_fluxus/aws-sam-example.git"
+    "url": ""
   },
   "author": "",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/frank_fluxus/aws-sam-example#readme",
+  "homepage": "",
   "devDependencies": {
     "jest": "^27.0.6",
     "cypress": "^7.7.0",
